@@ -1,0 +1,7 @@
+_build
+_website
+doctrees/*
+
+.ipynb_checkpoints
+.vscode
+*/.ipynb_checkpoints/*

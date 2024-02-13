@@ -1,1 +1,0 @@
-# dtu_weather_station
