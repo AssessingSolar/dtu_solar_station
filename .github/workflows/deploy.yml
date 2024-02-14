@@ -34,5 +34,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_build/dirhtml
+        publish_dir: ./docs/_build/dirhtml
         cname: weatherdata.construct.dtu.dk
