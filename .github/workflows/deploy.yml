@@ -1,23 +1,24 @@
 name: deploy-website
 
-## Only run this when the master branch changes
+## Only run this when the main branch changes
 on:
   push:
     branches:
     - main
 
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
+# This job installs dependencies, build the site, and pushes it to `gh-pages`
 jobs:
   deploy-book:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      working-directory: ./docs
 
     # Install dependencies
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
-        python-version: "3.10"
+        python-version: "3.11"
 
     - name: Install dependencies
       run: |
@@ -28,10 +29,10 @@ jobs:
       run: |
         make docs dirhtml
 
-    # Push the book's HTML to github-pages
+    # Push the site's HTML to github-pages
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_build/dirhtml
-        # cname: weatherdata.construct.dtu.dk
+        cname: weatherdata.construct.dtu.dk
