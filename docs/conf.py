@@ -58,6 +58,7 @@ html_theme_options = {
   "show_prev_next": False,  # hide "next section" buttons
   "footer_start": ["copyright"],
   "footer_end": [],  # don't show theme version
+  "content_footer_items": ["last-updated"],  # show last updated
 }
 
 # Remove primary side bar from all pages
@@ -81,13 +82,7 @@ html_sidebars = {
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
-# html_last_updated_fmt = '%%b %%d, %%Y'
-
-# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
-# html_show_sphinx = False
-
-# If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
-# html_show_copyright = False
+html_last_updated_fmt = '%%d %%b %%Y'
 
 #jupyter_execute_notebooks = "off"
 #nb_execution_allow_errors = True
