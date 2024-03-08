@@ -1,8 +1,8 @@
 # Instrumentation
 
-![](figures/dtu-solar-station.png)
+![](figures/dtu-solar-station.png){ width: 200px; }
 
-## Global horizontal irradiance (GHI)
+### Global horizontal irradiance (GHI)
 
 The Global horizontal irradiance is measured using an unshaded pyranometer, mounted horizontally on a Kipp & Zonen SOLYS2 tracker.
 
@@ -16,7 +16,7 @@ The Global horizontal irradiance is measured using an unshaded pyranometer, moun
 A ventilator was mounted on the GHI sensor on March 7th, 2024.
 
 
-## Diffuse horizontal irradiance (DHI)
+### Diffuse horizontal irradiance (DHI)
 
 The Diffuse horizontal irradiance is measured using a pyranometer shaded by a shadow ball, mounted horizontally on a Kipp & Zonen SOLYS2 tracker.
 
@@ -30,7 +30,7 @@ The Diffuse horizontal irradiance is measured using a pyranometer shaded by a sh
 A ventilator was mounted on the DHI sensor on March 7th, 2024.
 
 
-## Direct normal irradiance (DNI)
+### Direct normal irradiance (DNI)
 
 The Direct normal irradiance is measured using a pyrheliometer, mounted on a Kipp & Zonen SOLYS2 tracker.
 
@@ -42,7 +42,7 @@ The Direct normal irradiance is measured using a pyrheliometer, mounted on a Kip
 
 
 
-## Longwave downward irradiance (LWD)
+### Longwave downward irradiance (LWD)
 
 The Longwave downward irradiance is measured using a pyrgeometer shaded by a shadow ball, mounted horizontally on a Kipp & Zonen SOLYS2 tracker.
 
