@@ -49,7 +49,7 @@ html_title = 'DTU Solar Station'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-  "github_url": "https://github.com/assessingsolar/dtu_solar_station",
+  # "github_url": "https://github.com/assessingsolar/dtu_solar_station",
   "navbar_start": ["navbar-logo"],
   "navbar_center": ["navbar-nav"],
   "navbar_end": ["navbar-icon-links"],
@@ -82,8 +82,6 @@ html_sidebars = {
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
-html_last_updated_fmt = '%%d %%b %%Y'
+html_last_updated_fmt = '%d %b %Y'
 
-#jupyter_execute_notebooks = "off"
-#nb_execution_allow_errors = True
 
