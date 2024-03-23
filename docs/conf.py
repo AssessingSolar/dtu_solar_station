@@ -26,6 +26,7 @@ copyright = "2024, DTU"
 # ones.
 extensions = [
     'myst_parser',
+    'sphinx.ext.mathjax',
 ]
 
 # The master toctree document.
