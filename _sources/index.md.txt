@@ -1,6 +1,8 @@
-# DTU Solar Irradiance and Weather
+# Solar Irradiance and Weather Data
 
-Great to see that you have stumbled upon my blog!
+Welcome to DTU Construct's solar irradiance and weather data portal.
+
+Data is freely available from the [data](../data) page. Supportin metadata is available in the [instrumentation](instrumentation) and [logbook](logbook) pages, and information of the station's history is available [here](history).
 
 
 ```{toctree}
