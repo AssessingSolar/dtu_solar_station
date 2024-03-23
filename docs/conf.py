@@ -25,7 +25,7 @@ copyright = "2024, DTU"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'myst_nb',
+    'myst_parser',
 ]
 
 # The master toctree document.

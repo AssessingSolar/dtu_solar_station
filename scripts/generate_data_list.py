@@ -20,14 +20,16 @@ separator = ''.join(['|---']*(len(months)+1)) + '|'
 
 lines = [header, separator]
 
+icon = '<img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/download.svg" width="15" height="15">'
+
 for y in years:
     line = f"| {y} |"
     for m in months:
         month_number = pd.to_datetime(m, format='%b').strftime('%m')
         filename = f"dtu_{y}_{month_number}.csv"
         if filename in file_basenames:
-            link = os.path.join(url, filename)
-            line += f" [link]({link}) |"
+            link = os.path.join(url, 'data', filename).replace("\\","/")
+            line += f" [{icon}]({link}) |"
         else:
             line += " |"
     lines.append(line)
