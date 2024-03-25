@@ -46,7 +46,7 @@
     <link rel="prev" title="Solar Irradiance and Weather Data" href="../" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="23 March 2024"/>
+    <meta name="docbuild:last-update" content="25 March 2024"/>
   </head>
   
   
@@ -443,21 +443,68 @@
 <section id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
 <p>The data files contain the following parameters with a one-minute frequency:</p>
-<ul class="simple">
-<li><p>Time(utc) - time of measurement in UTC</p></li>
-<li><p>GHI - Global Horizontal Irradiance, <span class="math notranslate nohighlight">\(W/m^2\)</span></p></li>
-<li><p>DNI - Direct Normal Irradiance, <span class="math notranslate nohighlight">\(W/m^2\)</span></p></li>
-<li><p>DHI - Diffuse Horizontal Irradiance, <span class="math notranslate nohighlight">\(W/m^2\)</span></p></li>
-<li><p>LWD - Longwave Downwelling Irradiance, <span class="math notranslate nohighlight">\(W/m^2\)</span></p></li>
-<li><p>wind_speed_avg - Wind speed, <span class="math notranslate nohighlight">\(m/s\)</span></p></li>
-<li><p>wind_dir_avg - Wind direction, degrees</p></li>
-<li><p>air_temperature - Ambient air temperature, °C</p></li>
-<li><p>air_pressure - Air pressure, hPa</p></li>
-<li><p>relative_humidity - Relative humidity, %</p></li>
-<li><p>rain_accumulation</p></li>
-<li><p>rain_duration</p></li>
-<li><p>rain_intensity</p></li>
-</ul>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tag name</p></th>
+<th class="head"><p>Parameter</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Time(utc)</p></td>
+<td><p>Time of measurement in UTC</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>GHI</p></td>
+<td><p>Global Horizontal Irradiance</p></td>
+<td><p><span class="math notranslate nohighlight">\(W/m^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>DNI</p></td>
+<td><p>Direct Normal Irradiance</p></td>
+<td><p><span class="math notranslate nohighlight">\(W/m^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>DHI</p></td>
+<td><p>Diffuse Horizontal Irradiance</p></td>
+<td><p><span class="math notranslate nohighlight">\(W/m^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>LWD</p></td>
+<td><p>Longwave Downwelling Irradiance</p></td>
+<td><p><span class="math notranslate nohighlight">\(W/m^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>wind_speed_avg</p></td>
+<td><p>Wind speed</p></td>
+<td><p><span class="math notranslate nohighlight">\(m/s\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>wind_dir_avg</p></td>
+<td><p>Wind direction</p></td>
+<td><p>degrees</p></td>
+</tr>
+<tr class="row-odd"><td><p>air_temperature</p></td>
+<td><p>Ambient air temperature</p></td>
+<td><p>°C</p></td>
+</tr>
+<tr class="row-even"><td><p>air_pressure</p></td>
+<td><p>Air pressure</p></td>
+<td><p>hPa</p></td>
+</tr>
+<tr class="row-odd"><td><p>relative_humidity</p></td>
+<td><p>Relative humidity</p></td>
+<td><p>%</p></td>
+</tr>
+<tr class="row-even"><td><p>rain_accumulation</p></td>
+<td><p>Rain accumulation since last reset</p></td>
+<td><p>mm</p></td>
+</tr>
+<tr class="row-odd"><td><p>rain_duration</p></td>
+<td><p>Rain duration in 10-s increments</p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p>rain_intensity</p></td>
+<td><p>Rain intensity (1-min average)</p></td>
+<td><p>mm/h</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 
@@ -479,7 +526,7 @@
 <div class="footer-content-items footer-content__inner">
   
     <div class="footer-content-item"><p class="last-updated">
-  Last updated on 23 March 2024.
+  Last updated on 25 March 2024.
   <br/>
 </p></div>
   
