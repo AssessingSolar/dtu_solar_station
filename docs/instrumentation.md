@@ -59,7 +59,7 @@ The Longwave downward irradiance is measured using a pyrgeometer shaded by a sha
 
 
 ```{figure} /figures/weather_station.png
-:height: 400px
+:height: 200px
 :alt: Vaisala weather station
 
 Vaisala WTX520 weather station.
