@@ -58,12 +58,6 @@ The Longwave downward irradiance is measured using a pyrgeometer shaded by a sha
 |            | Kipp & Zonen CGR4  | 170223        | 8.95                                | 02-02-2021       |
 
 
-```{figure} /figures/weather_station.png
-:height: 200px
-:alt: Vaisala weather station
-
-Vaisala WTX520 weather station.
-```
 
 #### Weather measurements
 
@@ -76,3 +70,11 @@ The following meteorological parameters are measured by a weather transmitter, t
 * Wind direction
 * Rain intensity
 * Rain duration
+
+
+```{figure} /figures/weather_station.png
+:height: 200px
+:alt: Vaisala weather station
+
+Vaisala WTX520 weather station.
+```
