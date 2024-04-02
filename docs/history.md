@@ -4,7 +4,9 @@ The weather measurement station on the roof of building 119 at the Lyngby campus
 
 The upgrade was in terms of both hardware and software. The hardware was from National Instruments and comprised a compactRIO control and monitoring system (i.e., a stand-alone computer with internet access) with a number of input/output modules. A SOLYS 2 tracker from Kipp and Zonen replaced the old Eppley tracker. This tracker had an integrated GPS receiver that automatically determined its location and time. Additionally, the tracker was equipped with a solar sensor from Kipp and Zonen in order to fine-tune the tracker. A CMP 11 pyranometer from Kipp and Zonen was mounted on the tracker to measure the diffuse radiation, and a CHP 1 pyrheliometer was mounted to measure the direct normal irradiance. Regarding software, a database was created on the university's FTP server, and a website was developed that enabled users to download the data freely.
 
-This equipment was in operation until 2024, when a new station upgrade was done, bringing the station to its current state.
+In 2017, quality control and gap-filling of the measured data were established in order to increase the quality of the measured parameters.
+
+The aforementioned setup was in operation until 2024, when a new station upgrade was done, bringing the station to its current state.
 
 Some reports on the previous versions of the station can be found below:
 
