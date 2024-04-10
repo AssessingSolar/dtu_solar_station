@@ -12,7 +12,7 @@ df_raw = manual_corrections(df_raw)
 df_raw =  calculate_solar_values(df_raw, latitude_deg_dtu, longitude_deg_dtu)
 df_raw = other_corrections(df_raw)
 
-
+# %%
 rains = ['rain_accumulation', 'rain_duration', 'rain_intensity']
 parameters = ['GHI', 'DNI', 'DHI', 'LWD', 'wind_speed_avg', 'wind_dir_avg',
               'air_temperature', 'air_pressure', 'relative_humidity']
