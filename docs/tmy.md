@@ -4,7 +4,7 @@ DTU has contributed to the development of the Danish Design Reference Year (DRY)
 
 The updated version of the 2001-2010 DRY dataset can be downloaded {download}`here <../DRY_2001-2010_december_2018_version.zip>`. The TMY data is available in CSV and EPW format.
 
-```{image} /figures/globalstraaling_zonekort.png
+```{figure} /figures/globalstraaling_zonekort.png
 ---
 :alt: annual average global irradiance for Denmark
 :width: 200px
