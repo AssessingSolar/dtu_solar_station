@@ -7,7 +7,7 @@ The updated version of the 2001-2010 DRY dataset can be downloaded {download}`he
 ```{figure} /figures/globalstraaling_zonekort.png
 ---
 :alt: annual average global irradiance for Denmark
-:width: 200px
+:width: 100px
 :align: center
 ---
 Annual average GHI for Denmark and DRY climate zones.
