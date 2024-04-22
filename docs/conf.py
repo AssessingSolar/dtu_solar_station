@@ -51,6 +51,7 @@ html_title = 'DTU Solar Station'
 # documentation.
 html_theme_options = {
   # "github_url": "https://github.com/assessingsolar/dtu_solar_station",
+  "analytics": {"google_analytics_id": "G-1VQJYFHV7J"},
   "navbar_start": ["navbar-logo"],
   "navbar_center": ["navbar-nav"],
   "navbar_end": ["navbar-icon-links"],
@@ -84,5 +85,3 @@ html_sidebars = {
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
 html_last_updated_fmt = '%d %B %Y'
-
-
