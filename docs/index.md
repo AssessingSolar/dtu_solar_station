@@ -2,7 +2,7 @@
 
 Welcome to DTU Construct's solar irradiance and weather data portal.
 
-The station is located on the Lyngby campus of the Technical University of Denmark ontop of Building 119 (55.790647, 12.525055, 50 m asl).
+The station is located on the Technical University of Denmark's Lyngby Campus on top of Building 119 (55.79064, 12.52505, 50 m AMSL).
 
 Data can be downloaded freely from the [data](../data) page. Supporting metadata is available in the [instrumentation](instrumentation) and [logbook](logbook) pages.
 
