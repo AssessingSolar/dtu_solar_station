@@ -25,4 +25,5 @@ months = pd.date_range(start=df_raw.index[0], end=df_raw.index[-1], freq='MS')
 for m in months:
     m_end = m + pd.offsets.MonthEnd() + pd.Timedelta(minutes=24*60-1)
     df_sub = df_raw.loc[m: m_end, parameters+rains].asfreq('1min')
+    df_sub = df_sub.round(3)
     df_sub.to_csv(f"data/dtu_{m.strftime('%Y_%m')}.csv")
