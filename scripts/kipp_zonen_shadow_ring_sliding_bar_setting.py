@@ -4,6 +4,9 @@ import numpy as np
 import pandas as pd
 import pvlib
 
+# Information has been taken from the Kipp & Zonen CM 121 shadow ring
+# instruction manual.
+
 # Note. That the correction factors are based on the assumption horizontal
 # pyranometer installation and on uniform diffuse sky irradiance.
 
