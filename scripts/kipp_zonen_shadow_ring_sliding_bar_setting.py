@@ -8,10 +8,10 @@ import pvlib
 # instruction manual.
 
 # Note that the correction factors are based on the assumption of a horizontal
-# pyranometer installation and on uniform diffuse sky irradiance.
+# pyranometer installation and uniform diffuse sky irradiance.
 
-# Note. That the sliding bar has two scales; a higher and alower one. At
-# positive solar declinations (between 21 march and 23 sept) the part of the
+# The sliding bar has two scales; a higher and a lower one. At
+# positive solar declinations (between 21 Mar. and 23 Sep.) the part of the
 # scale that is oriented south must be read. In the northern hemisphere this is
 # the lower part.
 
