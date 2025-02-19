@@ -15,22 +15,40 @@ import pvlib
 # scale that is oriented south must be read. In the northern hemisphere this is
 # the lower part.
 
+# The sliding bar adjustment can be derived with the formula
+# L = abs(297 tan (D)), in which D is the declination of the sun.
+
+
+def calculate_sliding_bar_setting(declination):
+    """
+    Determine Kipp & Zonen shadow ring sliding bar setting.
+
+    Parameters
+    ----------
+    declination : numeric
+        Declination angle [degrees].
+
+    Returns
+    -------
+    numeric
+        Sliding bar setting [cm].
+
+    """
+    sliding_bar_mm = 297 * np.tan(np.deg2rad(np.abs(declination)))
+    sliding_bar_cm = np.round(sliding_bar_mm / 10, 1)
+    return sliding_bar_cm
+
+
 times = pd.date_range(start='2025-01-01', end='2025-12-31', freq='1d')
-
-declination_setting = np.arange(-24, 24+2, 2)
-
-slide_bar_setting = np.array([
-    132, 120, 108, 97, 85, 74, 63, 52, 42, 31, 21, 10, 0, 10, 21, 31, 42, 52,
-    63, 74, 85, 97, 108, 120, 132])
 
 declination = \
     np.rad2deg(pvlib.solarposition.declination_spencer71(times.dayofyear))
 
-slide_bar = np.interp(declination, declination_setting, slide_bar_setting)
+slide_bar = calculate_sliding_bar_setting(declination)
 
 df = pd.DataFrame(
     data={
-        'Slide bar setting': slide_bar.round(1),
+        'Slide bar setting': slide_bar,
         },
     index=[times.strftime('%m %b'), times.day]
     )
