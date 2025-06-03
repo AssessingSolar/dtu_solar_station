@@ -176,7 +176,7 @@ df_qc = df.copy()
 # Calculate missing component
 
 qc_path = 'C:/github/dtu_solar_station/metadata/'
-qc_filename = 'manual.csv'
+qc_filename = 'manual_corrections.csv'
 
 
 def read_qc_file(filename):
