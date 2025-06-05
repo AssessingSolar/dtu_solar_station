@@ -88,7 +88,7 @@ filenames = sorted(filenames, key=lambda s: file_dates.index(get_file_date(s)))
 complete_dates = pd.date_range(min(file_dates), max(file_dates), freq='1d')
 missing_dates = sorted(set(complete_dates).difference(file_dates))
 
-print(pd.Series(missing_dates).dt.strftime('%Y-%m').value_counts())
+print("Missing days\n", pd.Series(missing_dates).dt.strftime('%Y-%m').value_counts())
 
 # %% Read in data
 dfs = []
@@ -129,6 +129,11 @@ df = df[df.index != '1904-01-01']
 df = df.asfreq('1min')
 
 
+# Note from Elsa's logbook:
+# 11-5-2018: P1-P16 samt kupler er pillet ned. Dog sidder pyranometeret Mod1Ch7 stadig og måler
+# med en helt lukket kuppel.
+df.loc['2018-05-11':, half_dome_sensors] = np.nan
+
 # %% Drop unused/unnecessary columns
 df = df.drop(columns=channels_not_in_use)
 df = df.drop(columns=half_dome_sensors)
@@ -166,7 +171,7 @@ df['GHI_calc'] = (
 df['dni_extra'] = pvlib.irradiance.get_extra_radiation(df.index)
 df['ghi_extra'] = df['dni_extra'] * (np.cos(np.deg2rad(solpos['apparent_zenith']))).clip(lower=0)
 
-# %%
+# %% Copy dataframe
 
 df_qc = df.copy()
 
@@ -204,170 +209,17 @@ for _, row in qc.iterrows():
         df_qc.loc[row['start']: row['end'], columns] = np.nan
 
 
-# %% Plot all columns
+# These
+df_qc.loc['2018-03-21 00:00': '2018-06-21 16:35', 'DHI'] = 8.34/8.59 * \
+    df_qc.loc['2018-03-21 00:00': '2018-06-21 16:35', 'DHI']
 
-for c in df_qc.columns:
-    if c == 'Solys_gps_time':
-        continue
-    plt.figure()
-    df_qc.loc[df.index.year == 2015, c].plot()
-    plt.title(c)
-    plt.show()
-
-# %%
-year = 2015
-
-parameters = ['GHI', 'DHI', 'DNI']
-
-df_qc.loc[df_qc.index.year==year, parameters].plot(ylim=(-10,1200), subplots=True, sharex=True)
-#df_qc.loc['2018-01-01':, parameters].plot(ylim=(-200,600), subplots=True, sharex=True)
+df_qc.loc['2015-03-11 00:00': '2015-05-13 17:20', 'GHI'] = 4.98/5.065 * \
+    df_qc.loc['2015-03-11 00:00': '2015-05-13 17:20', 'GHI']
 
 
-# %% BSRN checks of main measurements
+# Important to recalculate
+df_qc['GHI_calc'] = (
+    df_qc['DHI'].clip(lower=0)
+    + (df_qc['DNI'] * np.cos(np.deg2rad(solpos['apparent_zenith']))).clip(lower=0))
 
-erl_dhi = pvanalytics.quality.irradiance.check_dhi_limits_qcrad(
-    dhi=df_qc['sun_diffuse'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='extreme')
-ppl_dhi = pvanalytics.quality.irradiance.check_dhi_limits_qcrad(
-    dhi=df_qc['sun_diffuse'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='physical')
-
-erl_ghi = pvanalytics.quality.irradiance.check_ghi_limits_qcrad(
-    ghi=df_qc['sun_total'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='extreme')
-
-ppl_spn1_ghi = pvanalytics.quality.irradiance.check_ghi_limits_qcrad(
-    ghi=df_qc['sun_total'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='physical')
-
-
-# %%
-ghi_ppl, dhi_ppl, dni_ppl = pvanalytics.quality.irradiance.check_irradiance_limits_qcrad(
-        solar_zenith=solpos['apparent_zenith'],
-        dni_extra=df_qc['dni_extra'],
-        ghi=df_qc['GHI'],
-        dhi=df_qc['DHI'],
-        dni=df_qc['DNI'],
-        limits='extreme',
-)
-
-# %%
-
-df_sub = df_qc['2021-09-25 00:00': '2021-10-20 00:00']
-df_sub = df_qc['2021-09-25 00:00': '2021-10-06 00:00']
-df_sub = df_qc['2021-10-04 00:00': '2021-10-06 00:00']
-axes = df_sub[['GHI','DHI','DNI']].plot(subplots=True, sharex=True)
-
-
-
-plot_measured_vs_calculated_ghi(df_sub['GHI'], df_sub['DHI'], df_sub['DNI'],
-                                solpos.loc[df_sub.index, 'apparent_zenith'], s=1, alpha=0.5)
-# _ = plot_diffuse_fraction_vs_clearness_index(
-#     ghi=df_sub['GHI'], dhi=df_sub['DHI'], solar_zenith=solpos.loc[df_sub.index, 'apparent_zenith'],
-#     dni_extra=df_sub['dni_extra'], mask=df_sub['GHI']>50, s=0.5, alpha=0.2, xlim=(None, None), ylim=(None, None))
-
-# %%
-
-
-# %%
-
-def plot_diffuse_fraction_vs_clearness_index(ghi, dhi, solar_zenith, dni_extra, mask=None,
-                                             c=None, xlim=(0, 2), ylim=(0, 1.5), **kwargs):
-    mask = np.ones(len(ghi)).astype(bool) if mask is None else mask
-    c = c if c is None else c[mask]
-
-    fig, ax = plt.subplots()
-    plt.scatter(
-        x = ghi[mask] / (dni_extra[mask] * np.cos(np.deg2rad(solar_zenith[mask])).clip(lower=0)),
-        y = dhi[mask] / ghi[mask],
-        c=c, **kwargs)
-
-    ax.set_xlabel('Diffuse fraction (DHI/GHI) [-]')
-    ax.set_ylabel('Clearness index (GHI/ETH) [-]')
-    ax.set_xlim(xlim)
-    ax.set_ylim(ylim)
-    plt.show()
-    return fig, ax
-
-
-def plot_measured_vs_calculated_ghi(ghi, dhi, dni, solar_zenith, mask=None, c=None,
-                                    xlim=(-10, 1200), ylim=(-10, 1200), **kwargs):
-    mask = np.ones(len(ghi)).astype(bool) if mask is None else mask
-    c = c if c is None else c[mask]
-
-    fig, ax = plt.subplots()
-    plt.scatter(
-        x = ghi[mask],
-        y = dhi[mask].clip(lower=0) + \
-            (dni[mask] * np.cos(np.deg2rad(solar_zenith[mask])).clip(lower=0)).clip(lower=0),
-        c=c, **kwargs)
-
-    ax.set_xlabel('Measured GHI [W/m$^2$]')
-    ax.set_ylabel('Calculated GHI [W/m$^2$]')
-    ax.plot([0, 1200], [0, 1200], c='r', alpha=0.8)
-    ax.set_xlim(xlim)
-    ax.set_ylim(ylim)
-    plt.show()
-    return fig, ax
-
-_ = plot_diffuse_fraction_vs_clearness_index(
-    ghi=df_qc['GHI'], dhi=df_qc['DHI'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], mask=df_qc['GHI']>50, s=0.5, alpha=0.2)
-
-# %% SPN1 check
-
-dfp = df_qc[df_qc['sun_total'] > 50]
-
-fig, ax = plt.subplots()
-plt.scatter(
-    x=dfp['sun_total'] / dfp['ghi_extra'],
-    y=dfp['sun_diffuse'] / dfp['sun_total'],
-    c=solpos.loc[dfp.index, 'apparent_elevation'],
-    s=0.5, alpha=0.2)
-
-ax.set_xlabel('sun_total / ghi_extra')
-ax.set_ylabel('sun_diffuse / sun_total')
-# ax.set_xlim(0, 2)
-# ax.set_ylim(-0.1, 1.2)
-
-# %% SPN1 BSRN checks
-consistent_components_spn1, diffuse_ratio_limit_spn1 = \
-    pvanalytics.quality.irradiance.check_irradiance_consistency_qcrad(
-        solar_zenith=solpos['apparent_zenith'],
-        ghi=df_qc['sun_total'],
-        dhi=df_qc['sun_diffuse'],
-        dni=np.nan,
-        outside_domain=True)
-
-erl_spn1_dhi = pvanalytics.quality.irradiance.check_dhi_limits_qcrad(
-    dhi=df_qc['sun_diffuse'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='extreme')
-ppl_spn1_dhi = pvanalytics.quality.irradiance.check_dhi_limits_qcrad(
-    dhi=df_qc['sun_diffuse'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='physical')
-
-erl_spn1_ghi = pvanalytics.quality.irradiance.check_ghi_limits_qcrad(
-    ghi=df_qc['sun_total'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='extreme')
-
-ppl_spn1_ghi = pvanalytics.quality.irradiance.check_ghi_limits_qcrad(
-    ghi=df_qc['sun_total'], solar_zenith=solpos['apparent_zenith'],
-    dni_extra=df_qc['dni_extra'], limits='physical')
-
-# %%
-df_qc.loc['2024-06-17 11:09':'2024-06-17 11:27', 'LWD'].plot(ylim=(-200,600))
-
-
-# %%
-
-
-df_qc.loc[(df.index.year==2015), irradiance_cols].plot(
-    subplots=True, sharex=True, figsize=(8,8))
-
-# %%
-# 2018, 2021 was an ugly year
-
-df_qc[df_qc.index.year==202].plot.scatter(
-    x='GHI', y='sun_total', xlim=[-10, 1200], ylim=[-10, 1200],
-    s=0.1, alpha=0.4)
-plt.plot([0, 1200], [0, 1200], c='r', alpha=0.5)
+# df_qc.to_pickle('quality_controlled_dtu_data.pkl')
