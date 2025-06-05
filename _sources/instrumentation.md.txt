@@ -19,7 +19,7 @@ The Global horizontal irradiance is measured using an unshaded pyranometer, moun
 | 21-06-2018 | Kipp & Zonen CMP11 | 128767        | 8.14                                | 21-06-2018       |
 | 22-02-2021 | Kipp & Zonen CMP11 | 128767        | 8.02                                | 08-02-2021       |
 
-A ventilator was mounted on the GHI sensor on March 7th, 2024.
+The GHI sensor was moved onto the tracker on 2017-09-06. A ventilator was mounted on the GHI sensor on March 7th, 2024. Pyranometer 128767 was also calibrated in November 2012 (sensitivity: 7.95).
 
 
 ## Diffuse horizontal irradiance (DHI)
@@ -33,7 +33,7 @@ The Diffuse horizontal irradiance is measured using a pyranometer shaded by a sh
 | 04-01-2021 | Kipp & Zonen CMP11 | 128766        | 8.27                                | 11-05-2020       |
 | 28-01-2021 | Kipp & Zonen CMP11 | 128762        | 8.58                                | 15-01-2021       |
 
-A ventilator was mounted on the DHI sensor on March 7th, 2024.
+A ventilator was mounted on the DHI sensor on March 7th, 2024. Pyranometer 128762 was also calibrated on November 2012 (sensitivity: 8.59).
 
 
 ## Direct normal irradiance (DNI)
@@ -61,7 +61,7 @@ The Longwave downward irradiance is measured using a pyrgeometer shaded by a sha
 
 ## Weather station
 
-The following meteorological parameters are measured by a weather transmitter, type WXT520, from the Finnish company Vaisala Oyj:
+From 2015 until the end of March 2025, the following meteorological parameters were measured by a weather transmitter, type WXT520, from the Finnish company Vaisala Oyj:
 
 * Air temperature
 * Relative humidity
