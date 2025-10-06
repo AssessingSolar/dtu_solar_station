@@ -45,8 +45,9 @@ The Direct normal irradiance is measured using a pyrheliometer, mounted on a Kip
 | 2014       | Kipp & Zonen CHP1  | 140049        | 7.85                                | 28-02-2014       |
 | 2018       | Kipp & Zonen CHP1  | 140049        | 7.88                                | 23-04-2018       |
 | 2021       | Kipp & Zonen CHP1  | 140049        | 7.87                                | 18-01-2021       |
+| Not used   | Kipp & Zonen CHP1  | 140049        | 7.9057                              | XX-10-2021 (IPC) |
 
-
+All calibrations were performed by the manufacturer Kipp & Zonen in Delft, the Netherlands, with the exception of the IPC value.
 
 ## Longwave downward irradiance (LWD)
 
