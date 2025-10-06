@@ -62,6 +62,18 @@ The Longwave downward irradiance is measured using a pyrgeometer shaded by a sha
 
 ## Weather station
 
+The current weather station is a Lufft WS601-UMB Smart Weather Sensor, which started operation on 2025-04-01. The weather station was initially placed on the railing of the solar irradiance measurement platform. On 2025-05-09, the weather station was installed on a 6 m mast to the north of the platform on the roof of DTU Building 119.
+The weather parameters therefore, do not follow the standard meteorological measurement practices (e.g.,
+wind should be measured 10 m above ground level). The station is placed 53 m AMSL.
+
+```{figure} /figures/weather_station_new.png
+:height: 250px
+:alt: Lufft weather station
+
+Lufft WS601-UMB Smart Weather Sensor.
+```
+
+
 From 2015 until the end of March 2025, the following meteorological parameters were measured by a weather transmitter, type WXT520, from the Finnish company Vaisala Oyj:
 
 * Air temperature
