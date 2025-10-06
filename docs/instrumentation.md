@@ -61,7 +61,9 @@ The Longwave downward irradiance is measured using a pyrgeometer shaded by a sha
 
 ## Weather station
 
-On 2025-04-01, the weather station was replaced with a Lufft WS601-UMB Smart Weather Sensor. The weather station was initially placed on the same platform as the instruments, measuring at a height of approximately 50 m AMSL. On 2025-05-09, the weather station was installed on a 5m mast. It should be noted that the mast was placed on the roof of the DTU 119 building, so the height at which the measurements are taken is approximately 53 m AMSL. The same measurements were continued to be monitored.
+The current weather station is a Lufft WS601-UMB Smart Weather Sensor, which started operation on 2025-04-01. The weather station was initially placed on the railing of the solar irradiance measurement platform. On 2025-05-09, the weather station was installed on a 6 m mast to the north of the platform on the roof of DTU Building 119.
+The weather parameters therefore, do not follow the standard meteorological measurement practices (e.g.,
+wind should be measured 10 m above ground level). The station is placed 53 m AMSL.
 
 ```{figure} /figures/weather_station_new.png
 :height: 250px
