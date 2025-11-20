@@ -223,3 +223,91 @@ df_qc['GHI_calc'] = (
     + (df_qc['DNI'] * np.cos(np.deg2rad(solpos['apparent_zenith']))).clip(lower=0))
 
 # df_qc.to_pickle('quality_controlled_dtu_data.pkl')
+
+# %% Export to Task 16 format
+
+meta = {
+    'station_code': 'LYN',
+    'latitude': '55.79065',
+    'longitude': '12.52509',
+    'altitude': '40',
+    'timezone': '1',
+}
+
+df_t16 = df_qc.copy()
+
+df_t16 = df_t16.rename(columns={'DHI': 'DIF'})
+
+full_index = pd.date_range(
+    start=df_t16.index.min().round('min').replace(month=1, day=1),
+    end=df_t16.index.max().round('min').replace(month=12, day=31, hour=23, minute=59),
+    freq='1min')
+
+df_t16 = df_t16.reindex(full_index)
+
+# %%
+# create individual columns containing the year, month,day, hour, and minute
+# based on the dataframe index
+df_t16['Year'] = df_t16.index.year
+df_t16['Month'] = df_t16.index.month
+df_t16['Day'] = df_t16.index.day
+df_t16['Hour'] = df_t16.index.hour
+df_t16['Minute'] = df_t16.index.minute
+
+
+empty_cols = [
+    'GHIcalc', 'Elev', 'Azim', 'Kc', 'usable', 'flagPPLDIF', 'flagERLDIF',
+    'flagPPLDNI', 'flagERLDNI', 'flagPPLGHI', 'flagERLGHI', 'flag3highSZA',
+    'flag3lowSZA', 'flagKt', 'flagKKt', 'flagKn', 'flagKnKt', 'flagKhighSZA',
+    'flagKlowSZA', 'flagTracker', 'flagManual']
+
+df_t16[empty_cols] = np.nan
+
+columns_in_specific_order = [
+    'Year', 'Month', 'Day', 'Hour', 'Minute',
+    'GHI', 'DNI', 'DIF', 'GHIcalc',
+    'Elev', 'Azim', 'Kc', 'usable',
+    'flagPPLDIF', 'flagERLDIF', 'flagPPLDNI', 'flagERLDNI',
+    'flagPPLGHI', 'flagERLGHI', 'flag3highSZA', 'flag3lowSZA',
+    'flagKt', 'flagKKt', 'flagKn', 'flagKnKt',
+    'flagKhighSZA', 'flagKlowSZA', 'flagTracker', 'flagManual'
+]
+
+df_t16 = df_t16[columns_in_specific_order]
+
+# %% Generate header lines
+
+header = [
+    f"# stationcode {meta['station_code']},,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    f"# latitude deg N {meta['latitude']},,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    f"# longitude deg E {meta['longitude']},,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    f"# altitude in m amsl {meta['altitude']},,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    f"# timezone offset from UTC in hours {meta['timezone']},,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# time stamp (Year Month Day Hour Minute) reference is in UTC and refers to the end of the period,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# missing data points in GHI DNI and DIF are noted with -999,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# GHI is the global horizontal irradiance in W/m2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# DNI is the direct normal irradiance in W/m2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# DIF is the diffuse horizontal irradiance in W/m2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# GHIcalc is the calculated GHI from DNI and DIF,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# Elev is the solar elevation in deg,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# Azim is the solar azimuth angle in deg N,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# Kc is the clearsky index calculated with CAMS mcclear with GHIcalc/GHI McClear,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# usable is the validity of a data point with 1 being valid and 0 being not usable,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "# flag values from various tests: 1 means the data failed the test. 0 means the test was passed. -999 means the test domain was not met,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+]
+
+header = '\n'.join(header) + '\n'
+
+
+# %%  Save the data in files based on the operation year
+
+output_path = 'C:/users/arajen/downloads/'
+
+for year, group in df_t16.groupby('Year'):
+    # Open the file for writing
+    with open(output_path + f"{meta['station_code']}_{year}.csv", "w", newline='') as f:
+        # Write the header lines at the top of the CSV file
+        f.write(header)
+        # Write the DataFrame content to the CSV file
+        group.to_csv(f, index=False, header=True)
+    print(f"Saved {meta['station_code']}_{year}.csv")
